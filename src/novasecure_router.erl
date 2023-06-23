@@ -7,7 +7,7 @@
 
 %% The Environment-variable is defined in your sys.config in {nova, [{environment, Value}]}
 routes(_Environment) ->
-  [#{prefix => "",
+  [#{prefix => "/ns",
   security => false,
   plugins => [{pre_request, nova_request_plugin, #{decode_json_body => true,
                                                    parse_qs => true
