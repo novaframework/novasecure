@@ -12,8 +12,9 @@ get_provider(#{bindings := #{<<"provider">> := Provider}}) ->
 
 get_callback(#{bindings := #{<<"provider">> := Provider}} = Req) ->
     Module = provider_module(Provider),
-    Module:callback(Req),
-    {status, 200}.
+    ok = Module:callback(Req),
+    #{redirect_url := Redirect} = application:get_env(novasecure, binary_to_atom(Provider), undefined),
+    {redirect, <<"/user">>}.
 
 post_callback(_Req) ->
     {status, 201}.
